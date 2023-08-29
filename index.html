@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick and Morty</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="icon" href="./imagens/RICK_MORTY_ICON-01.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</head>
+
+<body>
+    <header class="teste">
+        <img style="width: 30px;" src="./imagens/RICK_MORTY_ICON.png" alt="icone rick morty">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h1 class="texto d-flex align-items-center justify-content-center">API de Rick and Morty</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center mb-5">
+                <div class="col-9">
+
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-end-0" placeholder="Personagens" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                            <button style="background-color: white;" type="submit" class="input-group-text botao" id="basic-addon1">
+                                <i style="color: green;" class="bi bi-search"></i></button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+                                          <!-- modal personagem nao encontrado -->
+        <div class="modal fade" id="notFoundModal" tabindex="-1" aria-labelledby="notFoundModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notFoundModalLabel">Nenhum personagem foi encontrado</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- modal de loop -->
+
+        <div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Carregando...</span>
+                            </div>
+                            <span class="ms-2">Carregando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row ">
+                <div class="mt-3 col-12 d-flex align-items-center justify-content-center">
+                    <nav class aria-label="...">
+                        <ul class="pagination">
+                          <li class="page-item">
+                            <a class="texto-botao page-link voltarPagina" href="#" tabindex="-1">Anterior</a>
+                         
+                          <li class="page-item">
+                            <a class="texto-botao page-link proximaPagina" href="#">Proximo</a>
+                          </li>
+                        </ul>
+                      </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row personagem"></div>
+        </div>
+
+        <div class="container ">
+            <div class="row ">
+                <div class="mt-5 col-12 d-flex align-items-center justify-content-center">
+                    <nav class aria-label="...">
+                        <ul class="pagination">
+                          <li class="page-item">
+                            <a class="texto-botao page-link voltarPagina2" href="#" tabindex="-1">Anterior</a>
+                         
+                          <li class="page-item">
+                            <a class="texto-botao page-link proximaPagina2" href="#">Proximo</a>
+                          </li>
+                        </ul>
+                      </nav>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <footer class="fs-3 teste text-white">
+        <div class="container-fluid">
+            <div class="row rodape align-items-center justify-content-center">
+                <div class="col-4 d-flex align-items-center justify-content-center">
+                    <p class="contador-personagem"></p>
+                </div>
+                <div class="col-4 d-flex align-items-center justify-content-center">
+                    <p class="contador-localizacao">LOCALIZAÇÕES</p>
+                </div>
+                <div class="col-4 d-flex align-items-center justify-content-center">
+                    <p class="contador-episodio">EPISÓDIOS:</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <p>
+                        Desenvolvido por: <span><a class="text-decoration-none texto-nome" target="_blank"
+                                href="https://www.linkedin.com/in/yuriaresi/">Yuri Aresi</a> </span> em 2023.
+                    </p>
+
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+</body>
+
+
+</html>
