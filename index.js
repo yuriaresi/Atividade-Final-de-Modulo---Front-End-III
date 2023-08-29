@@ -16,7 +16,7 @@ async function criarPersonagens(personagens) {
             <div class="card teste" style="width: 18rem;">
                 <img src="${personagem.image}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">${personagem.name}</h5>
+                    <h5 class="text-white card-title">${personagem.name}</h5>
                 </div>
                 <ul class=" list-group list-group-flush">
                     <li class="teste text-white list-group-item"><b>${personagemStatus} - ${personagem.species}</b></li>
@@ -93,7 +93,8 @@ function urlAtual(url) {
             const botaoProximo = document.querySelector(".proximaPagina");
             const botaoVoltar = document.querySelector(".voltarPagina");
 
-            botaoProximo.addEventListener("click", function () {
+            botaoProximo.addEventListener("click", function (event) {
+                event.preventDefault()
                 if (proximoPagina) {
                     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
                     loadingModal.show();
@@ -107,7 +108,8 @@ function urlAtual(url) {
                 }
             });
 
-            botaoVoltar.addEventListener("click", function () {
+            botaoVoltar.addEventListener("click", function (event) {
+                event.preventDefault()
                 if (paginaAnterior) {
                     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
                     loadingModal.show();
@@ -129,7 +131,8 @@ function urlAtual(url) {
             const botaoProximo2 = document.querySelector(".proximaPagina2");
             const botaoVoltar2 = document.querySelector(".voltarPagina2");
 
-            botaoProximo2.addEventListener("click", function () {
+            botaoProximo2.addEventListener("click", function (event) {
+                event.preventDefault()
                 if (proximoPagina2) {
                     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
                     loadingModal.show();
@@ -143,7 +146,8 @@ function urlAtual(url) {
                 }
             });
 
-            botaoVoltar2.addEventListener("click", function () {
+            botaoVoltar2.addEventListener("click", function (event) {
+                event.preventDefault()
                 if (paginaAnterior2) {
                     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
                     loadingModal.show();
