@@ -1,6 +1,6 @@
 let paginaAtual = 1;
 
-
+buscarPersonagens();
 
 async function criarPersonagens(personagens) {
     const div = document.querySelector(".personagem");
@@ -10,9 +10,9 @@ async function criarPersonagens(personagens) {
         const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
         const personagemLocal = await localizacaoPersonagem(personagem);
         const episodios = await episodioPersonagem(personagem);
-        
+
         const html = `
-        <div class=" col-12 col-sm-6 col-lg-4 mb-5 d-flex justify-content-center">
+        <div class=" col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
             <div class="card teste" style="width: 18rem;">
                 <img src="${personagem.image}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -26,9 +26,9 @@ async function criarPersonagens(personagens) {
             </div>
         </div>
         `;
-            
+
         div.innerHTML += html;
-    
+
     }
 }
 
@@ -58,7 +58,7 @@ async function contadorEpisodio() {
         const response = await axios.get("https://rickandmortyapi.com/api/episode");
         const contagemEpisodio = response.data.info.count;
         let contadorEpisodio = document.querySelector(".contador-episodio");
-        contadorEpisodio.innerHTML = `Episódios:<span class="text-danger"> ${contagemEpisodio}</span>`;
+        contadorEpisodio.innerHTML = `Episódios:<span class="texto-nome"> <strong>${contagemEpisodio}</strong></span>`;
     } catch (error) {
         console.log(error.message);
     }
@@ -70,97 +70,25 @@ async function contadorLocalizacao() {
         const response = await axios.get("https://rickandmortyapi.com/api/location");
         const contagemLocalizacao = response.data.info.count;
         let contadorLocalizacao = document.querySelector(".contador-localizacao");
-        contadorLocalizacao.innerHTML = `Localização: <span class="text-danger">${contagemLocalizacao}</span>`;
+        contadorLocalizacao.innerHTML = `Localização: <span class="texto-nome"><strong>${contagemLocalizacao}</strong></span>`;
     }
     catch (error) { console.log(error.message); }
 }
 
 
-function urlAtual(url) {
-    axios.get(url)
+function buscarPersonagens() {
+
+    axios.get("https://rickandmortyapi.com/api/character?page=" + paginaAtual)
         .then(function (response) {
             const contagemPersonagem = response.data.info.count;
             let contadorPersonagem = document.querySelector(".contador-personagem");
-            contadorPersonagem.innerHTML = `Personagens: <span class="text-danger">${contagemPersonagem}</span>`;
+            contadorPersonagem.innerHTML = `Personagens: <span class="texto-nome"><strong>${contagemPersonagem}</strong></span>`;
 
-            console.log(response.data.info);
+            console.log(response.data.results);
 
             const personagens = response.data.results;
             criarPersonagens(personagens);
-            const proximoPagina = response.data.info.next;
-            const paginaAnterior = response.data.info.prev;
 
-            const botaoProximo = document.querySelector(".proximaPagina");
-            const botaoVoltar = document.querySelector(".voltarPagina");
-
-            botaoProximo.addEventListener("click", function (event) {
-                event.preventDefault()
-                if (proximoPagina) {
-                    const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
-                    loadingModal.show();
-                    setTimeout(() => {
-                        loadingModal.hide();
-                    }, 500);
-                    setTimeout(() => {
-                        urlAtual(proximoPagina);
-
-                    }, 1000);
-                }
-            });
-
-            botaoVoltar.addEventListener("click", function (event) {
-                event.preventDefault()
-                if (paginaAnterior) {
-                    const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
-                    loadingModal.show();
-                    setTimeout(() => {
-                        loadingModal.hide();
-                    }, 500);
-                    setTimeout(() => {
-                        urlAtual(paginaAnterior);
-
-                    }, 1000);
-
-                }
-            });
-
-
-            const proximoPagina2 = response.data.info.next;
-            const paginaAnterior2 = response.data.info.prev;
-
-            const botaoProximo2 = document.querySelector(".proximaPagina2");
-            const botaoVoltar2 = document.querySelector(".voltarPagina2");
-
-            botaoProximo2.addEventListener("click", function (event) {
-                event.preventDefault()
-                if (proximoPagina2) {
-                    const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
-                    loadingModal.show();
-                    setTimeout(() => {
-                        loadingModal.hide();
-                    }, 500);
-                    setTimeout(() => {
-                        urlAtual(proximoPagina2);
-
-                    }, 1000);
-                }
-            });
-
-            botaoVoltar2.addEventListener("click", function (event) {
-                event.preventDefault()
-                if (paginaAnterior2) {
-                    const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
-                    loadingModal.show();
-                    setTimeout(() => {
-                        loadingModal.hide();
-                    }, 500);
-                    setTimeout(() => {
-                        urlAtual(paginaAnterior2);
-
-                    }, 1000);
-
-                }
-            });
 
         })
         .catch(function (error) {
@@ -170,7 +98,41 @@ function urlAtual(url) {
 
 
 
-urlAtual("https://rickandmortyapi.com/api/character?page=" + paginaAtual);
+const botaoProximo = document.querySelector(".proximaPagina");
+const botaoVoltar = document.querySelector(".voltarPagina");
+
+function clickNextBtn() {
+    const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
+    loadingModal.show();
+    setTimeout(() => {
+        loadingModal.hide();
+    }, 500);
+    setTimeout(() => {
+        paginaAtual++;
+        buscarPersonagens();
+
+
+    }, 1000);
+
+}
+
+function clickPrevBtn() {
+
+    const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
+    loadingModal.show();
+    setTimeout(() => {
+        loadingModal.hide();
+    }, 500);
+    setTimeout(() => {
+        paginaAtual--;
+        buscarPersonagens();
+
+
+    }, 1000);
+}
+
+
+
 contadorEpisodio();
 contadorLocalizacao();
 
