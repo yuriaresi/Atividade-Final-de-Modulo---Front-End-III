@@ -12,7 +12,7 @@ async function criarPersonagens(personagens) {
         const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
         const personagemLocal = await localizacaoPersonagem(personagem);
         const episodios = await episodioPersonagem(personagem);
-
+  
         const html = `
         <div class="init-hidden col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
             <div class="card teste" style="width: 18rem;">
@@ -28,7 +28,7 @@ async function criarPersonagens(personagens) {
             </div>
         </div>
         `;
-
+    
         div.innerHTML += html;
 
     }
@@ -113,10 +113,6 @@ function paginaInicial() {
         buscarPersonagens();
     }, 500);
 }
-
-const botaoProximo = document.querySelector(".proximaPagina");
-const botaoVoltar = document.querySelector(".voltarPagina");
-
 function clickNextBtn() {
     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
     loadingModal.show();
@@ -133,7 +129,6 @@ function clickNextBtn() {
     }, 500);
 
 }
-
 function clickPrevBtn() {
 
     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
@@ -151,11 +146,8 @@ function clickPrevBtn() {
 }
 
 
-
 contadorEpisodio();
 contadorLocalizacao();
-
-// Função para lidar com a pesquisa de personagens
 
 
 async function pesquisarPersonagens(termo) {

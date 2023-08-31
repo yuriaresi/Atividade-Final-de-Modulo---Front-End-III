@@ -38,9 +38,9 @@ main {
   padding: 10px;
 }
 
-/* .init-hidden {
+.init-hidden {
   animation-name: teste1;
-  animation-duration: 3s;
+  animation-duration: 1s;
   animation-timing-function:ease-in-out;
   
   animation-iteration-count: 1;
@@ -55,4 +55,10 @@ main {
   to {
     transform: scale(1);
   }
-} */
+}
+@media screen and (max-width: 768px) {
+  .init-hidden {
+    animation-name: none;
+    transform: scale(1) 
+}
+}
