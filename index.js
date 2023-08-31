@@ -1,6 +1,6 @@
 let paginaAtual = 1;
-let numeroPagina = document.querySelector(".numero-pagina")
-let numeroPagina2 = document.querySelector("#numero-pagina")
+let numeroPagina = document.querySelector(".numero-pagina");
+let numeroPagina2 = document.querySelector("#numero-pagina");
 
 buscarPersonagens();
 
@@ -30,7 +30,7 @@ async function criarPersonagens(personagens) {
         `;
 
         div.innerHTML += html;
-        
+
     }
 }
 
@@ -86,9 +86,10 @@ function buscarPersonagens() {
             let contadorPersonagem = document.querySelector(".contador-personagem");
             contadorPersonagem.innerHTML = `Personagens: <span class="texto-nome"><strong>${contagemPersonagem}</strong></span>`;
 
-            console.log(response.data.results);
+
 
             const personagens = response.data.results;
+
             criarPersonagens(personagens);
 
 
@@ -99,7 +100,7 @@ function buscarPersonagens() {
 }
 
 
-function paginaInicial(){
+function paginaInicial() {
     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
     loadingModal.show();
     setTimeout(() => {
@@ -109,7 +110,7 @@ function paginaInicial(){
         paginaAtual = 1;
         numeroPagina.innerHTML = paginaAtual;
         numeroPagina2.innerHTML = paginaAtual;
-    buscarPersonagens();
+        buscarPersonagens();
     }, 500);
 }
 
@@ -181,7 +182,6 @@ async function pesquisarPersonagens(termo) {
 
 
 
-// Adicione o evento de submit do formulário de pesquisa
 const searchButton = document.querySelector(".botao");
 searchButton.addEventListener("click", function (event) {
     event.preventDefault();
@@ -199,15 +199,6 @@ searchButton.addEventListener("click", function (event) {
 });
 
 
-
-function animacao() {
- const divAnimacao = document.querySelector(".testando-animacao");
- setTimeout(() => {
-    divAnimacao.classList.remove("init-hidden");
-    
-}, 1000);
-divAnimacao.classList.add("init-hidden-off");
-}
 
 
 
