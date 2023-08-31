@@ -38,11 +38,10 @@ main {
   padding: 10px;
 }
 
-.init-hidden {
+.testequalquer {
   animation-name: teste1;
   animation-duration: 1s;
   animation-timing-function:ease-in-out;
-  
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
@@ -56,9 +55,4 @@ main {
     transform: scale(1);
   }
 }
-@media screen and (max-width: 768px) {
-  .init-hidden {
-    animation-name: none;
-    transform: scale(1) 
-}
-}
+

@@ -6,19 +6,19 @@ buscarPersonagens();
 
 async function criarPersonagens(personagens) {
     personagensAtuais = personagens;
-
+    console.log(personagens);
     const div = document.querySelector(".personagem");
     div.innerHTML = "";
 
-    personagens.forEach(async (personagem, indice ) => {
+    personagens.forEach( (personagem, indice ) => {
        
     
         const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
-        const personagemLocal = await localizacaoPersonagem(personagem);
-        const episodios = await episodioPersonagem(personagem);
+        const personagemLocal =  localizacaoPersonagem(personagem);
+        const episodios =  episodioPersonagem(personagem);
 
         const html = `
-        <div onclick="chamarModal(personagensAtuais[${indice}])" class="init-hidden col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
+        <div onclick="chamarModal(personagensAtuais[${indice}])" class="testequalquer col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
             <div class="card teste" style="width: 18rem;">
                 <img src="${personagem.image}" class="card-img-top" alt="...">
                 <div class="card-body">
