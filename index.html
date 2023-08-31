@@ -16,7 +16,8 @@
 
 <body>
     <header class="teste">
-        <img style="width: 30px;" src="./imagens/RICK_MORTY_ICON.png" alt="icone rick morty">
+        <img id="icone-header" onclick="paginaInicial()" style="width: 50px;" src="./imagens/RICK_MORTY_ICON.png"
+            alt="icone rick morty">
         <div class="container">
             <div class="row mb-3">
                 <div class="col-12">
@@ -78,16 +79,19 @@
 
         <div class="container">
             <div class="row ">
-                <div class="mt-3 col-12 d-flex align-items-center justify-content-center">
+                <div class="my-5 col-12 d-flex align-items-center justify-content-center">
                     <nav class aria-label="...">
                         <ul class="pagination">
                             <li class="page-item">
                                 <a onclick="clickPrevBtn()" class="texto-botao page-link voltarPagina" href="#"
                                     tabindex="-1"><i class="bi bi-arrow-left-square-fill"></i> Anterior</a>
+                            <li>
+                                <a class="numero-pagina texto-botao page-link " href="#" tabindex="-1">1</i> </a>
+                            </li>
 
                             <li class="page-item">
-                                <a onclick="clickNextBtn()" class="texto-botao page-link proximaPagina"
-                                    href="#">Proximo <i class="bi bi-arrow-right-square-fill"></i></a>
+                                <a onclick="clickNextBtn()" class="texto-botao page-link proximaPagina" href="#">Proximo
+                                    <i class="bi bi-arrow-right-square-fill"></i></a>
                             </li>
                         </ul>
                     </nav>
@@ -99,18 +103,21 @@
             <div class="row personagem"></div>
         </div>
 
-        <div class="container ">
+        <div class="container">
             <div class="row ">
-                <div class="mt-5 col-12 d-flex align-items-center justify-content-center">
+                <div class="my-5 col-12 d-flex align-items-center justify-content-center">
                     <nav class aria-label="...">
                         <ul class="pagination">
                             <li class="page-item">
-                                <a onclick="clickPrevBtn()" class="texto-botao page-link voltarPagina2" href="#"
+                                <a onclick="clickPrevBtn()" class="texto-botao page-link voltarPagina" href="#"
                                     tabindex="-1"><i class="bi bi-arrow-left-square-fill"></i> Anterior</a>
+                            <li>
+                                <a id="numero-pagina" class=" texto-botao page-link " href="#" tabindex="-1">1</i> </a>
+                            </li>
 
                             <li class="page-item">
-                                <a onclick="clickNextBtn()" class="texto-botao page-link proximaPagina2"
-                                    href="#">Proximo <i class="bi bi-arrow-right-square-fill"></i></a>
+                                <a onclick="clickNextBtn()" class="texto-botao page-link proximaPagina" href="#">Proximo
+                                    <i class="bi bi-arrow-right-square-fill"></i></a>
                             </li>
                         </ul>
                     </nav>
@@ -134,7 +141,7 @@
 
     </main>
     <footer class="fs-3 teste text-white">
-        
+
         <br>
         <br>
 

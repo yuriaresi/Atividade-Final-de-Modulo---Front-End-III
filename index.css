@@ -27,3 +27,7 @@ main {
 .card:hover {
     scale: 1.1
 }
+
+#icone-header {
+    cursor: pointer;
+}

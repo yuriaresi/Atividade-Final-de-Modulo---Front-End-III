@@ -1,4 +1,7 @@
+const botaoProximo = document.querySelector(".proximaPagina");
+const botaoVoltar = document.querySelector(".voltarPagina");
 let paginaAtual = 1;
+
 
 buscarPersonagens();
 
@@ -13,7 +16,7 @@ async function criarPersonagens(personagens) {
 
         const html = `
         <div class=" col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
-            <div class="card teste" style="width: 18rem;">
+            <div onclick="" class="card teste" style="width: 18rem;">
                 <img src="${personagem.image}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="text-white card-title">${personagem.name}</h5>
@@ -25,6 +28,7 @@ async function criarPersonagens(personagens) {
                 </ul>
             </div>
         </div>
+        
         `;
 
         div.innerHTML += html;
@@ -74,11 +78,8 @@ async function contadorLocalizacao() {
     }
     catch (error) { console.log(error.message); }
 }
-
-
-function buscarPersonagens() {
-
-    axios.get("https://rickandmortyapi.com/api/character?page=" + paginaAtual)
+function localizacaoInicial(){
+    axios.get("https://rickandmortyapi.com/api/character")
         .then(function (response) {
             const contagemPersonagem = response.data.info.count;
             let contadorPersonagem = document.querySelector(".contador-personagem");
@@ -94,30 +95,68 @@ function buscarPersonagens() {
         .catch(function (error) {
             console.log(error.message);
         });
+    
 }
 
-
-
-const botaoProximo = document.querySelector(".proximaPagina");
-const botaoVoltar = document.querySelector(".voltarPagina");
-
-function clickNextBtn() {
+function paginaInicial(){
     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
     loadingModal.show();
     setTimeout(() => {
         loadingModal.hide();
     }, 500);
     setTimeout(() => {
-        paginaAtual++;
+        paginaAtual = 1;
+    buscarPersonagens();
+    }, 500);
+}
+
+function buscarPersonagens() {
+
+    axios.get("https://rickandmortyapi.com/api/character?page=" + paginaAtual)
+        .then(function (response) {
+            const contagemPersonagem = response.data.info.count;
+            let contadorPersonagem = document.querySelector(".contador-personagem");
+            contadorPersonagem.innerHTML = `Personagens: <span class="texto-nome"><strong>${contagemPersonagem}</strong></span>`;
+
+
+            const personagens = response.data.results;
+            criarPersonagens(personagens);
+
+
+        })
+        .catch(function (error) {
+            console.log(error.message);
+        });
+}
+
+
+
+function clickNextBtn() {
+    let numeroPagina = document.querySelector(".numero-pagina");
+    let numeroPagina2 = document.querySelector("#numero-pagina");
+    const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
+    loadingModal.show();
+    setTimeout(() => {
+        loadingModal.hide();
+    }, 500);
+    setTimeout(() => {
         buscarPersonagens();
+        paginaAtual++;
+        numeroPagina.innerHTML = paginaAtual;
+        numeroPagina2.innerHTML = paginaAtual;
 
 
-    }, 1000);
+    }, 500);
 
 }
 
 function clickPrevBtn() {
-
+    let numeroPagina = document.querySelector(".numero-pagina");
+    let numeroPagina2 = document.querySelector("#numero-pagina");
+    if (paginaAtual <=1) {
+     paginaAtual = 1;
+    }else{
+    
     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
     loadingModal.show();
     setTimeout(() => {
@@ -126,10 +165,13 @@ function clickPrevBtn() {
     setTimeout(() => {
         paginaAtual--;
         buscarPersonagens();
+        numeroPagina.innerHTML = paginaAtual;
+        numeroPagina2.innerHTML = paginaAtual;
 
 
-    }, 1000);
-}
+    }, 500);
+    
+}}
 
 
 
@@ -146,7 +188,7 @@ async function pesquisarPersonagens(termo) {
         const personagensEncontrados = response.data.results;
 
         const div = document.querySelector(".personagem");
-        div.innerHTML = "";  // Limpa o conteúdo atual
+        div.innerHTML = ""; 
 
         if (personagensEncontrados.length === 0) {
             div.innerHTML = "<p>Nenhum personagem encontrado.</p>";
@@ -166,7 +208,6 @@ async function pesquisarPersonagens(termo) {
 // Adicione o evento de submit do formulário de pesquisa
 const searchButton = document.querySelector(".botao");
 searchButton.addEventListener("click", function (event) {
-    event.preventDefault();
     const searchTerm = document.querySelector(".form-control").value;
     const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
     loadingModal.show();
