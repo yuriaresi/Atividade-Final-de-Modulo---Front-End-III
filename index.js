@@ -99,6 +99,19 @@ function buscarPersonagens() {
 }
 
 
+function paginaInicial(){
+    const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
+    loadingModal.show();
+    setTimeout(() => {
+        loadingModal.hide();
+    }, 500);
+    setTimeout(() => {
+        paginaAtual = 1;
+        numeroPagina.innerHTML = paginaAtual;
+        numeroPagina2.innerHTML = paginaAtual;
+    buscarPersonagens();
+    }, 500);
+}
 
 const botaoProximo = document.querySelector(".proximaPagina");
 const botaoVoltar = document.querySelector(".voltarPagina");
@@ -116,7 +129,7 @@ function clickNextBtn() {
         numeroPagina2.innerHTML = paginaAtual;
 
 
-    }, 1000);
+    }, 500);
 
 }
 
@@ -133,7 +146,7 @@ function clickPrevBtn() {
         numeroPagina.innerHTML = paginaAtual;
         numeroPagina2.innerHTML = paginaAtual;
 
-    }, 1000);
+    }, 500);
 }
 
 
