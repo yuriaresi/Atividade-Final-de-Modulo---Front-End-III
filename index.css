@@ -1,33 +1,57 @@
 main {
-    padding-bottom: 50vw;
-    background-color: #242724;
-    background-image: url(/imagens/FUNDO_2.jpg);
-    background-position:  bottom;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-  }
+  padding-bottom: 50vw;
+  background-color: #242724;
+  background-image: url(/imagens/FUNDO_2.jpg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
 
 .texto {
-    color: green;
-    font-size: 3rem;
-    font-weight: 900;
+  color: green;
+  font-size: 3rem;
+  font-weight: 900;
 }
 
-.teste{
-    background-color: #222222;
-    border: solid 2px #242724;
+.teste {
+  background-color: #222222;
+  border: solid 2px #242724;
 }
 .texto-nome {
-    color: #5ec572;
+  color: #5ec572;
 }
 .texto-botao {
-    color: #5ec572;
+  color: #5ec572;
 }
 
 .card:hover {
-    scale: 1.1
+  scale: 1.1;
 }
 
 #icone-header {
-    cursor: pointer;
+  cursor: pointer;
 }
+.icones-link {
+  text-decoration: none;
+  color: #5ec572;
+  font-size: 30px;
+  padding: 10px;
+}
+
+.init-hidden {
+  opacity: 1;
+  animation-name: teste1;
+  animation-duration: 2s;
+  animation-timing-function: ase-in-out;
+}
+@keyframes teste1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+

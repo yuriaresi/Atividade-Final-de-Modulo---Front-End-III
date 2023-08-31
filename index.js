@@ -14,7 +14,7 @@ async function criarPersonagens(personagens) {
         const episodios = await episodioPersonagem(personagem);
 
         const html = `
-        <div class=" col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
+        <div class="init-hidden col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
             <div class="card teste" style="width: 18rem;">
                 <img src="${personagem.image}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -30,7 +30,7 @@ async function criarPersonagens(personagens) {
         `;
 
         div.innerHTML += html;
-
+        
     }
 }
 
@@ -197,3 +197,18 @@ searchButton.addEventListener("click", function (event) {
         pesquisarPersonagens(searchTerm);
     }, 500);
 });
+
+
+
+function animacao() {
+ const divAnimacao = document.querySelector(".testando-animacao");
+ setTimeout(() => {
+    divAnimacao.classList.remove("init-hidden");
+    
+}, 1000);
+divAnimacao.classList.add("init-hidden-off");
+}
+
+
+
+
