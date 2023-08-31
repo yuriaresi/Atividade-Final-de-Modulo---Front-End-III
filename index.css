@@ -38,7 +38,7 @@ main {
   padding: 10px;
 }
 
-/* .init-hidden {
+.init-hidden {
   animation-name: teste1;
   animation-duration: 1s;
   animation-timing-function:ease-in-out;
@@ -61,4 +61,4 @@ main {
     animation-name: none;
     transform: scale(1) 
 }
-} */
+}

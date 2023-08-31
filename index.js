@@ -1,20 +1,24 @@
 let paginaAtual = 1;
 let numeroPagina = document.querySelector(".numero-pagina");
 let numeroPagina2 = document.querySelector("#numero-pagina");
-
+let personagensAtuais = [];
 buscarPersonagens();
 
 async function criarPersonagens(personagens) {
+    personagensAtuais = personagens;
+
     const div = document.querySelector(".personagem");
     div.innerHTML = "";
 
-    for (const personagem of personagens) {
+    personagens.forEach(async (personagem, indice ) => {
+       
+    
         const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
         const personagemLocal = await localizacaoPersonagem(personagem);
         const episodios = await episodioPersonagem(personagem);
-  
+
         const html = `
-        <div class=" col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
+        <div onclick="chamarModal(personagensAtuais[${indice}])" class="init-hidden col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
             <div class="card teste" style="width: 18rem;">
                 <img src="${personagem.image}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -28,10 +32,10 @@ async function criarPersonagens(personagens) {
             </div>
         </div>
         `;
-    
+
         div.innerHTML += html;
 
-    }
+    })
 }
 
 async function localizacaoPersonagem(personagem) {
@@ -192,6 +196,73 @@ searchButton.addEventListener("click", function (event) {
 
 
 
+function chamarModal(personagem) {
+    const modalContent = document.querySelector("#modalPersonagem");
+    modalContent.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">${personagem.name}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="${personagem.image}" alt="${personagem.name}" class="img-fluid">
+                    <p>Status: ${personagem.status}</p>
+                    <p>Espécie: ${personagem.species}</p>
+                    <p>Gênero: ${personagem.gender}</p>
+                    <!-- Adicione mais detalhes conforme necessário -->
+                </div>
+            </div>
+        </div>
+    `;
+
+    const myModalEl = new bootstrap.Modal(document.getElementById('modalPersonagem'));
+    myModalEl.show();
+}
 
 
 
+
+
+
+
+
+
+// async function modalPersonagem() {
+//     try {
+//         let response = await axios.get("https://rickandmortyapi.com/api/character/"); {
+//             const personagens = response.data.results;
+//             for (const personagem of personagens) {
+//                 const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
+//                 const div = document.querySelector("#modalPersonagem");
+//                 const id = personagem.id;
+//                 let html = `
+//                 <div class="modal-dialog">
+//               <div class="modal-content">
+//                 <div class="modal-header">
+//                   <h5 class="modal-title">${personagem.name}</h5>
+//                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+//                 </div>
+//                 <div class="modal-body">
+//                   <p>Modal body text goes here.</p>
+//                 </div>
+//                 <div class="modal-footer">
+//                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+//                   <button type="button" class="btn btn-primary">Save changes</button>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//                 `;
+//                 div.innerHTML = html;
+
+//             }
+
+//         }
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
+
+
+// modalPersonagem();
