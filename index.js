@@ -192,8 +192,8 @@ function chamarModal(personagem) {
     const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
     const modalContent = document.querySelector("#modalPersonagem");
     modalContent.innerHTML = `
-        <div class="modal-dialog text-center testequalquer">
-            <div class="modal-content">
+        <div class="modal-dialog text-center testequalquer modal-teste">
+            <div class="modal-content modal-teste">
                 <div class="modal-header teste text-white">
                     <h5 class="modal-title fs-1 fw-bold text-light w-100 text-center">${personagem.name}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

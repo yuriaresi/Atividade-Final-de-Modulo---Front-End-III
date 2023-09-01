@@ -55,4 +55,11 @@ main {
     transform: scale(1);
   }
 }
-
+.modal-border{
+  border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+.modal-teste{
+  border: 2px solid #5ec572;
+  
+}
