@@ -6,16 +6,18 @@ buscarPersonagens();
 
 async function criarPersonagens(personagens) {
     personagensAtuais = personagens;
-    console.log(personagens);
+
     const div = document.querySelector(".personagem");
     div.innerHTML = "";
+    
+    for (let indice = 0; indice < personagensAtuais.length; indice ++) {
 
-    personagens.forEach( (personagem, indice ) => {
-       
+        const personagem = personagensAtuais[indice];
+        
+        const episodios = await episodioPersonagem(personagem);
     
         const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
-        const personagemLocal =  localizacaoPersonagem(personagem);
-        const episodios =  episodioPersonagem(personagem);
+        
 
         const html = `
         <div onclick="chamarModal(personagensAtuais[${indice}])" class="testequalquer col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
@@ -26,8 +28,8 @@ async function criarPersonagens(personagens) {
                 </div>
                 <ul class=" list-group list-group-flush">
                     <li class="teste text-white list-group-item"><b>${personagemStatus} - ${personagem.species}</b></li>
-                    <li class="teste text-white list-group-item"><p>Ultima localização conhecida:</p><b>${personagemLocal}</b></li>
-                    <li class="teste text-white list-group-item"><p>Episódio:</p><b>${episodios}</b></li>
+                    <li class="teste text-white list-group-item"><p>Ultima localização conhecida:</p><b>${personagem.location["name"]}</b></li>
+                    <li class="teste text-white list-group-item"><p>Episódio:</p><b class="testando-ep">${episodios}</b></li>
                 </ul>
             </div>
         </div>
@@ -35,21 +37,11 @@ async function criarPersonagens(personagens) {
 
         div.innerHTML += html;
 
-    })
-}
-
-async function localizacaoPersonagem(personagem) {
-    try {
-        const response = await axios.get(personagem.location.url);
-        return response.data.name;
-
-    } catch (error) {
-        console.log(error.message);
-        return "Localização desconhecida";
     }
 }
 
-async function episodioPersonagem(personagem) {
+
+ async function episodioPersonagem(personagem) {
     try {
         const response = await axios.get(personagem.episode[0]);
         return response.data.name;
@@ -197,20 +189,20 @@ searchButton.addEventListener("click", function (event) {
 
 
 function chamarModal(personagem) {
+    const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
     const modalContent = document.querySelector("#modalPersonagem");
     modalContent.innerHTML = `
-        <div class="modal-dialog">
+        <div class="modal-dialog text-center testequalquer">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">${personagem.name}</h5>
+                <div class="modal-header teste text-white">
+                    <h5 class="modal-title fs-1 fw-bold text-light w-100 text-center">${personagem.name}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <img src="${personagem.image}" alt="${personagem.name}" class="img-fluid">
-                    <p>Status: ${personagem.status}</p>
-                    <p>Espécie: ${personagem.species}</p>
-                    <p>Gênero: ${personagem.gender}</p>
-                    <!-- Adicione mais detalhes conforme necessário -->
+                <div class="modal-body teste text-white">
+                    <img src="${personagem.image}" alt="${personagem.name}" class="img-fluid rounded center">
+                    <p class="teste text-white text-center fs-5">Status: <b>${personagemStatus}</b></p>
+                    <p class="teste text-white fs-5">Espécie: <b>${personagem.species}</b></p>
+                    <p class="teste text-white fs-5">Gênero: <b>${personagem.gender}</b></p>
                 </div>
             </div>
         </div>
@@ -221,48 +213,3 @@ function chamarModal(personagem) {
 }
 
 
-
-
-
-
-
-
-
-// async function modalPersonagem() {
-//     try {
-//         let response = await axios.get("https://rickandmortyapi.com/api/character/"); {
-//             const personagens = response.data.results;
-//             for (const personagem of personagens) {
-//                 const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
-//                 const div = document.querySelector("#modalPersonagem");
-//                 const id = personagem.id;
-//                 let html = `
-//                 <div class="modal-dialog">
-//               <div class="modal-content">
-//                 <div class="modal-header">
-//                   <h5 class="modal-title">${personagem.name}</h5>
-//                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-//                 </div>
-//                 <div class="modal-body">
-//                   <p>Modal body text goes here.</p>
-//                 </div>
-//                 <div class="modal-footer">
-//                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-//                   <button type="button" class="btn btn-primary">Save changes</button>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//                 `;
-//                 div.innerHTML = html;
-
-//             }
-
-//         }
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// }
-
-
-// modalPersonagem();
