@@ -99,7 +99,7 @@ function paginaInicial() {
     loadingModal.show();
     setTimeout(() => {
         loadingModal.hide();
-    }, 500);
+    }, 1000);
     setTimeout(() => {
         paginaAtual = 1;
         numeroPagina.innerHTML = paginaAtual;
@@ -112,7 +112,7 @@ function clickNextBtn() {
     loadingModal.show();
     setTimeout(() => {
         loadingModal.hide();
-    }, 500);
+    }, 1000);
     setTimeout(() => {
         paginaAtual++;
         buscarPersonagens();
@@ -129,7 +129,7 @@ function clickPrevBtn() {
     loadingModal.show();
     setTimeout(() => {
         loadingModal.hide();
-    }, 500);
+    }, 1000);
     setTimeout(() => {
         paginaAtual--;
         buscarPersonagens();
