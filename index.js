@@ -9,15 +9,12 @@ async function criarPersonagens(personagens) {
 
     const div = document.querySelector(".personagem");
     div.innerHTML = "";
+    let finalHtml = ""
     
     for (let indice = 0; indice < personagensAtuais.length; indice ++) {
-
         const personagem = personagensAtuais[indice];
-        
         const episodios = await episodioPersonagem(personagem);
-    
         const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
-        
 
         const html = `
         <div onclick="chamarModal(personagensAtuais[${indice}])" class="testequalquer col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
@@ -35,9 +32,10 @@ async function criarPersonagens(personagens) {
         </div>
         `;
 
-        div.innerHTML += html;
-
+        finalHtml += html;
     }
+
+    div.innerHTML += finalHtml
 }
 
 
