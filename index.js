@@ -17,7 +17,7 @@ async function criarPersonagens(personagens) {
         const personagemStatus = personagem.status === "Alive" ? "🟢 Vivo" : personagem.status === "Dead" ? "🔴 Morto" : "⚪ Desconhecido";
 
         const html = `
-        <div onclick="chamarModal(personagensAtuais[${indice}])" class="testequalquer col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center">
+        <div onclick="chamarModal(personagensAtuais[${indice}])" class="testequalquer col-12 col-sm-6 col-lg-4 col-xxl-3 mb-5 d-flex justify-content-center icone-header">
             <div class="card teste" style="width: 18rem;">
                 <img src="${personagem.image}" class="card-img-top" alt="...">
                 <div class="card-body">
